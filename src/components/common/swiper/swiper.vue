@@ -28,7 +28,7 @@ export default {
     },
     moveRatio: {
       type: Number,
-      default: 0.25
+      default: 0.10
     },
     showIndicator: {
       type: Boolean,
@@ -37,24 +37,21 @@ export default {
   },
   data() {
     return {
-      slideCount: 0,//元素个数
-      totalWidth: 0,//swiper的宽度
-      swiperStyle: {}, //swiper样式
-      currentIndex: 1,//当前的index
-      scrolling: false//是否滚动
+      slideCount: 0,
+      totalWidth: 0,
+      swiperStyle: {},
+      currentIndex: 1,
+      scrolling: false
     }
   },
   mounted: function () {
     // 1.操作DOM, 在前后添加Slide
     setTimeout(() => {
       this.handleDom();
-
-      // 2.开启定时器
       this.startTimer();
     }, 200)
   },
   methods: {
-    //定时器操作
     startTimer: function () {
       this.playTimer = window.setInterval(() => {
         this.currentIndex++;
