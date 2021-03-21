@@ -17,7 +17,6 @@
 import Navbar from "@/components/common/navbar/Navbar";
 import {getHomeDtat} from "@/network/home";
 import {swiper, swiperitem} from "@/components/common/swiper"
-
 export default {
   name: "home",
   data() {
