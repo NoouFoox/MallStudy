@@ -5,10 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [
     {path: '', redirect: './home'},
-    {path: '/home', component: () => import('@/views/Home')},
-    {path: '/profile', component: () => import('@/views/profile')},
-    {path: '/cart', component: () => import('@/views/cart')},
-    {path: '/category', component: () => import('@/views/category')}
+    {path: '/home', component: () => import('@/views/Home/Home')},
+    {path: '/profile', component: () => import('@/views/profile/profile')},
+    {path: '/cart', component: () => import('@/views/cart/cart')},
+    {path: '/category', component: () => import('@/views/category/category')}
 ]
 
 const router = new VueRouter({

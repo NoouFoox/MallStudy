@@ -3,20 +3,15 @@
     <navbar class="home-nav">
       <div slot="center">首页-购物街</div>
     </navbar>
-    <swiper>
-      <swiperitem v-for="(item ,index) in banners" :key="index">
-        <a :href="item.link">
-          <img :src="item.image" alt="">
-        </a>
-      </swiperitem>
-    </swiper>
+    <HomeSwiper :banners="banners"/>
   </div>
 </template>
 
 <script>
+
 import Navbar from "@/components/common/navbar/Navbar";
 import {getHomeDtat} from "@/network/home";
-import {swiper, swiperitem} from "@/components/common/swiper"
+import HomeSwiper from "./childComps/HomeSwiper";
 export default {
   name: "home",
   data() {
@@ -26,9 +21,8 @@ export default {
     }
   },
   components: {
+    HomeSwiper,
     Navbar,
-    swiper,
-    swiperitem
   },
   created() {
     getHomeDtat().then(res => {
