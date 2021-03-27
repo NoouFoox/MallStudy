@@ -113,7 +113,7 @@ import Feture from "@/views/Home/childComps/Feture";
 
 import HomeSwiper from "./childComps/HomeSwiper";
 
-import {getHomeDtat} from "@/network/home";
+import {getHomeData, getHomeGoods} from "@/network/home";
 
 export default {
   name: "home",
@@ -124,7 +124,7 @@ export default {
       banners: [],
       goods: {
         'pop': {page: 0, list: []},
-        'news': {page: 0, list: []},
+        'new': {page: 0, list: []},
         'sell': {page: 0, list: []}
       }
     }
@@ -137,11 +137,35 @@ export default {
     Navbar,
   },
   created() {
-    getHomeDtat().then(res => {
-      this.recommended = res.recommend.list
-      console.log(this.recommended)
-      this.banners = res.banner.list
-    })
+    this.getHomeData();
+    this.getHomeGoods('pop');
+    // this.getHomeGoods('new');
+    // this.getHomeGoods('sell');
+  },
+  methods: {
+    getHomeData() {
+      getHomeData().then(res => {
+        this.recommended = res.recommend.list
+        this.banners = res.banner.list
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    getHomeGoods(type) {
+      const page = this.goods[type].page + 1
+      getHomeGoods(type, page).then((res) => {
+        // pop的前30条数据
+        // 经典循环
+        // for (let n of res.list){
+        //   this.goods[type].list.push(n)
+        // }
+        //快传
+        this.goods[type].list.push(...res.list)
+        console.log(this.goods)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>
