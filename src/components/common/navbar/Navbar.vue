@@ -26,7 +26,7 @@ export default {
   line-height: 44px;
   /*百分比行高/遗忘*/
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   box-shadow: 0 1px 1px rgba(100,100,100,0.3);
 }
 

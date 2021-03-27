@@ -16,7 +16,7 @@ export default {
 <style scoped>
 .feture-img{
   width: 100%;
-  height: 40rem;
+  /*height: 40rem;*/
   border-bottom: 8px solid #eee;
 }
 </style>

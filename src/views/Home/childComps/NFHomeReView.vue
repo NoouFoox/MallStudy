@@ -26,6 +26,8 @@ export default {
 <style scoped>
 .rcomend{
   display: flex;
+  right: 0;
+  left: 0;
   width: 100%;
   text-align: center;
   font-size: 15px;
