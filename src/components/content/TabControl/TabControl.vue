@@ -29,6 +29,8 @@ export default {
   methods: {
     itemTabClick(index) {
       this.currentIndex = index
+      this.$emit('tabClick',index)
+      //自定义事件 向上传
     }
   }
 }
