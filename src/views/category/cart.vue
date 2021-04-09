@@ -1,5 +1,5 @@
 <template>
-<div>信息</div>
+<div>发现</div>
 </template>
 
 <script>

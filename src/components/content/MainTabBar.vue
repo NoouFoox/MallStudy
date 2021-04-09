@@ -8,12 +8,12 @@
     <tab-bar-item path="/cart" act-clolr="#D4237A">
       <img src="../../assets/img/tabbar/mail.png" slot="item-icon">
       <img src="../../assets/img/tabbar/ontabbar/mail.png" slot="item-icon-on">
-      <div slot="item-text">信息</div>
+      <div slot="item-text">分类</div>
     </tab-bar-item>
     <tab-bar-item path="/category" act-clolr="#D4237A">
       <img src="../../assets/img/tabbar/qukuai.png" slot="item-icon">
       <img src="../../assets/img/tabbar/ontabbar/qukuai.png" slot="item-icon-on">
-      <div slot="item-text">发现</div>
+      <div slot="item-text">购物车</div>
     </tab-bar-item>
     <tab-bar-item path="/profile" act-clolr="#D4237A">
       <img src="../../assets/img/tabbar/user.png" slot="item-icon">
