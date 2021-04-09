@@ -28,8 +28,6 @@ export default {
   justify-content: space-around;
   /*包裹*/
   flex-wrap: wrap;
-  padding: 2px;
-  margin-bottom: 50px;
 }
 
 </style>

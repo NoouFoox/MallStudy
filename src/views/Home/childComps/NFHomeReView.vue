@@ -38,8 +38,8 @@ export default {
   flex: 1;
 }
 .rcomend-item img{
-  margin-bottom:6px ;
-  width: 69px;
-  height: 69px;
+  width: 65px;
+  height: 65px;
+  margin-bottom: 10px;
 }
 </style>

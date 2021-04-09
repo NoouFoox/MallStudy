@@ -1,14 +1,16 @@
 <template>
   <div id="home">
     <navbar class="home-nav">
-      <div slot="center">首页-购物街</div>
+      <div class="home-nav" slot="center">首页-购物街</div>
     </navbar>
-    <HomeSwiper :banners="banners"/>
-    <NFHomeReView :recommended="recommended"/>
-    <feture/>
-    <TabControl class="TabControl" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
-<!--    <goodList :goods="goods[cuType].list"></goodList>-->
-    <goodList :goods="showGoods"></goodList>
+    <scroll class="content">
+      <HomeSwiper :banners="banners"/>
+      <NFHomeReView :recommended="recommended"/>
+      <feture/>
+      <TabControl class="TabControl" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
+      <!--    <goodList :goods="goods[cuType].list"></goodList>-->
+      <good-list :goods="showGoods"/>
+    </scroll>
   </div>
 
 </template>
@@ -25,6 +27,7 @@ import Feture from "@/views/Home/childComps/Feture";
 import HomeSwiper from "./childComps/HomeSwiper";
 
 import {getHomeData, getHomeGoods} from "@/network/home";
+import Scroll from "@/components/common/scroll/Scroll";
 
 export default {
   name: "home",
@@ -42,6 +45,7 @@ export default {
     }
   },
   components: {
+    Scroll,
     goodList,
     TabControl,
     Feture,
@@ -55,8 +59,8 @@ export default {
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
   },
-  computed:{
-    showGoods(){
+  computed: {
+    showGoods() {
       return this.goods[this.cuType].list
     }
   },
@@ -65,16 +69,16 @@ export default {
      * 事件监听
      */
     tabClick(index) {
-      switch (index){
+      switch (index) {
         case 0:
-          this.cuType ='pop'
-              break
+          this.cuType = 'pop'
+          break
         case 1:
-          this.cuType='new'
-              break
+          this.cuType = 'new'
+          break
         case 2:
-          this.cuType='sell'
-              break
+          this.cuType = 'sell'
+          break
         default:
           console.log('???')
       }
@@ -108,10 +112,12 @@ export default {
   }
 }
 </script>
-
+<!--scoped作用域-->
 <style scoped>
 #home {
-  padding-top: 43px;
+  /*padding-top: 44px;*/
+  height: 100vh;
+  position: relative;
 }
 
 .home-nav {
@@ -128,5 +134,14 @@ export default {
   position: sticky;
   top: 43px;
   z-index: 9;
+}
+
+.content {
+  /*overflow: hidden;*/
+  position: absolute;
+  top:44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
 }
 </style>

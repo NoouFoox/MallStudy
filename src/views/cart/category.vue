@@ -117,6 +117,7 @@ export default {
   },
   // 挂载完成
   mounted() {
+
     this.scroll = new BScroll('.wrapper', {
       probeType: 3,
       pullUpLoad: true
