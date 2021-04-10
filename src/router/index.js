@@ -7,8 +7,8 @@ const routes = [
     {path: '', redirect: './home'},
     {path: '/home', component: () => import('@/views/Home/Home')},
     {path: '/profile', component: () => import('@/views/profile/profile')},
-    {path: '/cart', component: () => import('@/views/cart/category')},
-    {path: '/category', component: () => import('@/views/category/cart')}
+    {path: '/category', component: () => import('@/views/category/category')},
+    {path: '/cart', component: () => import('@/views/cart/cart')}
 ]
 
 const router = new VueRouter({

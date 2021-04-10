@@ -3,13 +3,14 @@
     <navbar class="home-nav">
       <div class="home-nav" slot="center">首页-购物街</div>
     </navbar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll" :probeType="3" @scroll="contentScroll">
       <HomeSwiper :banners="banners"/>
       <NFHomeReView :recommended="recommended"/>
       <feture/>
       <TabControl class="TabControl" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
       <goodList :goods="goods[cuType].list"></goodList>
     </scroll>
+    <back-top @click.native="backClick()" v-show="isShowBT"></back-top>
   </div>
 
 </template>
@@ -27,11 +28,13 @@ import HomeSwiper from "./childComps/HomeSwiper";
 
 import {getHomeData, getHomeGoods} from "@/network/home";
 import Scroll from "@/components/common/scroll/Scroll";
+import BackTop from "@/components/common/BackTop/BackTop";
 
 export default {
   name: "home",
   data() {
     return {
+      isShowBT: false,
       recommended: [],
       result: null,
       banners: [],
@@ -44,6 +47,7 @@ export default {
     }
   },
   components: {
+    BackTop,
     Scroll,
     goodList,
     TabControl,
@@ -82,6 +86,13 @@ export default {
           console.log('???')
       }
     },
+    backClick() {
+      // console.log("返回")
+      this.$refs.scroll.scrollTo(0, 0, 500)
+    },
+    contentScroll(po) {
+      this.isShowBT = -po.y > 1000
+    },
     /**
      * 网络请求相关
      */
@@ -114,9 +125,9 @@ export default {
 <!--scoped作用域-->
 <style scoped>
 #home {
-  padding-top: 44px;
-  /*height: 100vh;*/
-  /*position: relative;*/
+  /*padding-top: 43px;*/
+  height: 100vh;
+  position: relative;
 }
 
 .home-nav {
@@ -137,8 +148,9 @@ export default {
 
 .content {
   /*overflow: hidden;*/
+  height: calc(100% - 98px);
   position: absolute;
-  top: 44px;
+  top: 43px;
   bottom: 49px;
   left: 0;
   right: 0;

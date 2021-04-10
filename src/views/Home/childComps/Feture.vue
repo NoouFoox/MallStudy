@@ -1,8 +1,8 @@
 <template>
   <div class="feture">
-    <a href="https://noou.club">
+    <a href="#">
       <!--.....-->
-      <img src="../../../../src/assets/img/a.png" class="feture-img">
+      <img src="../../../../src/assets/img/a.jpg" class="feture-img">
     </a>
   </div>
 </template>
