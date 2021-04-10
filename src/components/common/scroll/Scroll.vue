@@ -7,24 +7,22 @@
 </template>
 
 <script>
-import BScroll from "better-scroll";
+import BScroll from 'better-scroll'
 
 export default {
   name: "Scroll",
   data() {
     return {
-      scroll: null
+      scroll: null,
     }
   },
-
-  mounted() {
+  updated() {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true,
-      probeType: 3,
-      pullUpLoad: true
+      probeType: this.probeType,
+      pullUpLoad: this.pullUpLoad
     })
-
-
+    console.log(this.scroll)
   }
 }
 </script>

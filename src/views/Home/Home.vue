@@ -8,8 +8,7 @@
       <NFHomeReView :recommended="recommended"/>
       <feture/>
       <TabControl class="TabControl" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
-      <!--    <goodList :goods="goods[cuType].list"></goodList>-->
-      <good-list :goods="showGoods"/>
+      <goodList :goods="goods[cuType].list"></goodList>
     </scroll>
   </div>
 
@@ -115,13 +114,13 @@ export default {
 <!--scoped作用域-->
 <style scoped>
 #home {
-  /*padding-top: 44px;*/
-  height: 100vh;
-  position: relative;
+  padding-top: 44px;
+  /*height: 100vh;*/
+  /*position: relative;*/
 }
 
 .home-nav {
-  background: #FF699C;
+  background: var(--color-tint);
   color: white;
   position: fixed;
   left: 0;
@@ -139,9 +138,11 @@ export default {
 .content {
   /*overflow: hidden;*/
   position: absolute;
-  top:44px;
+  top: 44px;
   bottom: 49px;
   left: 0;
   right: 0;
 }
+
+
 </style>

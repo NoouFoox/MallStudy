@@ -24,10 +24,10 @@ export default {
 <style scoped>
 .goods{
   display: flex;
-  /*在弹性盒对象的 <div> 元素中的各项周围留有空白：*/
-  justify-content: space-around;
   /*包裹*/
   flex-wrap: wrap;
+  /*在弹性盒对象的 <div> 元素中的各项周围留有空白：*/
+  justify-content: space-around;
 }
 
 </style>
