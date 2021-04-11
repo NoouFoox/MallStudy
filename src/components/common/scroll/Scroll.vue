@@ -35,15 +35,19 @@ export default {
       probeType: this.probeType,
       pullUpLoad: this.pullUpLoad
     })
-    this.scroll.on('scroll', (po) => {
-      // console.log(p)
-      //监听滚动
-      this.$emit('scroll', po)
-    })
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on('scroll', (po) => {
+        // console.log(p)
+        //监听滚动
+        this.$emit('scroll', po)
+      })
+    }
     //监听上拉
-    this.scroll.on('pullingUp', () => {
-      this.$emit('pullingUp')
-    })
+    if (this.pullUpLoad) {
+      this.scroll.on('pullingUp', () => {
+        this.$emit('pullingUp')
+      })
+    }
   },
   methods: {
     scrollTo(x, y, time = 300) {
@@ -51,9 +55,11 @@ export default {
     },
     finishPullUp() {
       this.scroll.finishPullUp()
+      console.log('123')
     },
-    ref(){
-     this.scroll && this.scroll.refresh()
+    ref() {
+      // console.log('----')
+      this.scroll && this.scroll.refresh()
     }
   }
 }

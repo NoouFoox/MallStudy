@@ -3,16 +3,19 @@
     <navbar class="home-nav">
       <div class="home-nav" slot="center">首页-购物街</div>
     </navbar>
+    <TabControl :titles="['流行','新款','精选']"
+                @tabClick="tabClick" ref="goodList" class="tabControl" v-show="isTabFixed"/>
     <scroll class="content"
             ref="scroll"
             :probeType="3"
             @scroll="contentScroll"
             :pull-up-load="true"
             @pullingUp="loadM">
-      <HomeSwiper :banners="banners"/>
+      <HomeSwiper :banners="banners" @swimgLoad="swimgLoad()"/>
       <NFHomeReView :recommended="recommended"/>
       <feture/>
-      <TabControl class="TabControl" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
+      <TabControl :titles="['流行','新款','精选']"
+                  @tabClick="tabClick" ref="goodList"/>
       <goodList :goods="goods[cuType].list"></goodList>
     </scroll>
     <back-top @click.native="backClick()" v-show="isShowBT"></back-top>
@@ -39,6 +42,8 @@ export default {
   name: "home",
   data() {
     return {
+      isTabFixed: false,
+      tabOffTop: 0,
       isShowBT: false,
       recommended: [],
       result: null,
@@ -66,11 +71,16 @@ export default {
     this.getHomeGoods('pop');
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
+  },
+  mounted() {
     // 监听图片加载
+    const refresh = this.debounce(this.$refs.scroll.ref, 200)
     this.$bus.$on('itemImageLoad', () => {
-      console.log('----')
-      this.$refs.scroll.ref()
+      // this.$refs.scroll.ref()
+      refresh()
     })
+    // 获取tablist offsettop
+
   },
   computed: {
     showGoods() {
@@ -78,6 +88,18 @@ export default {
     }
   },
   methods: {
+    debounce(func, delay) {
+      let timer = null
+      return function (...args) {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          func.apply(this, args)
+        }, delay)
+      }
+    },
+    swimgLoad() {
+      this.tabOffTop = this.$refs.goodList.$el.offsetTop
+    },
     /**
      * 事件监听
      */
@@ -102,6 +124,7 @@ export default {
     },
     contentScroll(po) {
       this.isShowBT = -po.y > 1000
+      this.isTabFixed = (-po.y) > this.tabOffTop
     },
     loadM() {
       // console.log('上拉');
@@ -145,20 +168,23 @@ export default {
   height: 100vh;
   position: relative;
 }
-
+.tabControl{
+  position: relative;
+  z-index: 9;
+}
 .home-nav {
   background: var(--color-tint);
   color: white;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
+  position: relative;
+  /*left: 0;*/
+  /*right: 0;*/
+  /*top: 0;*/
   z-index: 9;
 }
 
 .TabControl {
-  position: sticky;
-  top: 43px;
+  /*position: sticky;*/
+  /*top: 43px;*/
   z-index: 9;
 }
 
@@ -172,5 +198,11 @@ export default {
   right: 0;
 }
 
+.fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 44px;
+}
 
 </style>
