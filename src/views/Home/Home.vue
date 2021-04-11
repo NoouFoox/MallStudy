@@ -3,7 +3,12 @@
     <navbar class="home-nav">
       <div class="home-nav" slot="center">首页-购物街</div>
     </navbar>
-    <scroll class="content" ref="scroll" :probeType="3" @scroll="contentScroll">
+    <scroll class="content"
+            ref="scroll"
+            :probeType="3"
+            @scroll="contentScroll"
+            :pull-up-load="true"
+            @pullingUp="loadM">
       <HomeSwiper :banners="banners"/>
       <NFHomeReView :recommended="recommended"/>
       <feture/>
@@ -61,6 +66,11 @@ export default {
     this.getHomeGoods('pop');
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
+    // 监听图片加载
+    this.$bus.$on('itemImageLoad', () => {
+      console.log('----')
+      this.$refs.scroll.ref()
+    })
   },
   computed: {
     showGoods() {
@@ -93,6 +103,10 @@ export default {
     contentScroll(po) {
       this.isShowBT = -po.y > 1000
     },
+    loadM() {
+      // console.log('上拉');
+      this.getHomeGoods(this.cuType)
+    },
     /**
      * 网络请求相关
      */
@@ -115,6 +129,8 @@ export default {
         //快传
         this.goods[type].list.push(...res.list)
         this.goods[type].page += 1;
+
+        this.$refs.scroll.finishPullUp()
       }).catch(err => {
         console.log(err)
       })
