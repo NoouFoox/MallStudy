@@ -55,7 +55,6 @@ export default {
     },
     finishPullUp() {
       this.scroll.finishPullUp()
-      console.log('123')
     },
     ref() {
       // console.log('----')

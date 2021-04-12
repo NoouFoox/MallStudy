@@ -76,7 +76,8 @@ export default {
     // 监听图片加载
     const refresh = this.debounce(this.$refs.scroll.ref, 200)
     this.$bus.$on('itemImageLoad', () => {
-      // this.$refs.scroll.ref()
+      this.$refs.scroll.ref()
+      this.$refs.scroll.finishPullUp()
       refresh()
     })
     // 获取tablist offsettop
@@ -99,6 +100,7 @@ export default {
     },
     swimgLoad() {
       this.tabOffTop = this.$refs.goodList.$el.offsetTop
+      this.$refs.scroll.finishPullUp()
     },
     /**
      * 事件监听
