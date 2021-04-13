@@ -77,7 +77,7 @@ export default {
     const refresh = this.debounce(this.$refs.scroll.ref, 200)
     this.$bus.$on('itemImageLoad', () => {
       this.$refs.scroll.ref()
-      this.$refs.scroll.finishPullUp()
+      // this.$refs.scroll.finishPullUp()
       refresh()
     })
     // 获取tablist offsettop
