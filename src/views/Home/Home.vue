@@ -27,7 +27,7 @@
 
 import Navbar from "@/components/common/navbar/Navbar";
 import TabControl from "@/components/content/TabControl/TabControl";
-import goodList from "@/components/content/Goos/goodList";
+import goodList from "@/components/content/Goods/goodList";
 
 import NFHomeReView from "@/views/Home/childComps/NFHomeReView";
 import Feture from "@/views/Home/childComps/Feture";
@@ -35,6 +35,7 @@ import Feture from "@/views/Home/childComps/Feture";
 import HomeSwiper from "./childComps/HomeSwiper";
 
 import {getHomeData, getHomeGoods} from "@/network/home";
+// import {getdetaildata} from "@/network/detail";
 import Scroll from "@/components/common/scroll/Scroll";
 import BackTop from "@/components/common/BackTop/BackTop";
 
@@ -48,6 +49,7 @@ export default {
       recommended: [],
       result: null,
       banners: [],
+      saveY:0,
       goods: {
         'pop': {page: 0, list: []},
         'new': {page: 0, list: []},
@@ -74,9 +76,9 @@ export default {
   },
   mounted() {
     // 监听图片加载
-    const refresh = this.debounce(this.$refs.scroll.ref, 200)
+    const refresh = this.debounce(this.$refs.scroll.refresh, 200)
     this.$bus.$on('itemImageLoad', () => {
-      this.$refs.scroll.ref()
+      this.$refs.scroll.refresh()
       // this.$refs.scroll.finishPullUp()
       refresh()
     })
@@ -87,6 +89,14 @@ export default {
     showGoods() {
       return this.goods[this.cuType].list
     }
+  },
+  activated() {
+    this.$refs.scroll.scrollTo(0, this.saveY,0)
+    this.$refs.scroll.refresh();
+    //最好进行刷新
+  },
+  deactivated() {
+    this.saveY=this.$refs.scroll.getScrollY()
   },
   methods: {
     debounce(func, delay) {
@@ -138,7 +148,7 @@ export default {
     getHomeData() {
       getHomeData().then(res => {
         this.recommended = res.recommend.list
-        this.banners = res.banner.list
+        this.banners = res.data.list
       }).catch(err => {
         console.log(err)
       })
@@ -170,10 +180,12 @@ export default {
   height: 100vh;
   position: relative;
 }
-.tabControl{
+
+.tabControl {
   position: relative;
   z-index: 9;
 }
+
 .home-nav {
   background: var(--color-tint);
   color: white;

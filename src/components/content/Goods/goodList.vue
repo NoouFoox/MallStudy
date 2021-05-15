@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import GoodListItem from "@/components/content/Goos/goodListItem";
+import GoodListItem from "@/components/content/Goods/goodListItem";
 
 export default {
   name: "goodList",

@@ -8,7 +8,11 @@ const routes = [
     {path: '/home', component: () => import('@/views/Home/Home')},
     {path: '/profile', component: () => import('@/views/profile/profile')},
     {path: '/category', component: () => import('@/views/category/category')},
-    {path: '/cart', component: () => import('@/views/cart/cart')}
+    {path: '/cart', component: () => import('@/views/cart/cart')},
+    {
+        path: '/detail/:iid'
+        , component: () => import('../views/detail/Detail')
+    }
 ]
 
 const router = new VueRouter({
