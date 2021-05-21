@@ -9,20 +9,35 @@
 引用
 * normalize.css
 
-#### 1.划分目录结构
+#### 1.目录结构
 ```
 src
 ├─assets
 │  ├─css
 │  └─img
-├─common 公共js
+│      ├─common
+│      └─tabbar
+│          └─ontabbar
+├─common
 ├─components
-│  ├─common 公共组件
+│  ├─common
+│  │  ├─BackTop
+│  │  ├─navbar
+│  │  ├─scroll
+│  │  └─swiper
 │  └─content
-├─network 网络请求
-├─router 路由
-├─store vuex状态
-└─views 
+│      ├─Goods
+│      └─TabControl
+├─network
+├─router
+├─store
+└─views
+    ├─cart
+    ├─category
+    ├─detail
+    │  └─childcomponent
+    ├─Home
+    │  └─childComps
+    └─profile
 ```
-
 
