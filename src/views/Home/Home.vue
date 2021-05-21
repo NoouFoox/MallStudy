@@ -148,7 +148,7 @@ export default {
     getHomeData() {
       getHomeData().then(res => {
         this.recommended = res.recommend.list
-        this.banners = res.data.list
+        this.banners = res.banner.list
       }).catch(err => {
         console.log(err)
       })

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "better-scroll": "^2.2.1",
+    "better-scroll": "^1.13.2",
     "core-js": "^3.6.5",
     "install": "^0.13.0",
     "npm": "^7.6.3",
