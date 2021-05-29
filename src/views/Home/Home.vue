@@ -4,7 +4,10 @@
       <div class="home-nav" slot="center">首页-购物街</div>
     </navbar>
     <TabControl :titles="['流行','新款','精选']"
-                @tabClick="tabClick" ref="goodList" class="tabControl" v-show="isTabFixed"/>
+                @tabClick="tabClick"
+                ref="goodList"
+                class="tabControl"
+                v-show="isTabFixed"/>
     <scroll class="content"
             ref="scroll"
             :probeType="3"
@@ -33,9 +36,8 @@ import NFHomeReView from "@/views/Home/childComps/NFHomeReView";
 import Feture from "@/views/Home/childComps/Feture";
 
 import HomeSwiper from "./childComps/HomeSwiper";
-
+import {itemIxin} from "@/common/mixin";
 import {getHomeData, getHomeGoods} from "@/network/home";
-// import {getdetaildata} from "@/network/detail";
 import Scroll from "@/components/common/scroll/Scroll";
 import BackTop from "@/components/common/BackTop/BackTop";
 
@@ -49,7 +51,7 @@ export default {
       recommended: [],
       result: null,
       banners: [],
-      saveY:0,
+      saveY: 0,
       goods: {
         'pop': {page: 0, list: []},
         'new': {page: 0, list: []},
@@ -58,6 +60,7 @@ export default {
       cuType: 'pop'
     }
   },
+  mixins: [itemIxin],
   components: {
     BackTop,
     Scroll,
@@ -91,12 +94,12 @@ export default {
     }
   },
   activated() {
-    this.$refs.scroll.scrollTo(0, this.saveY,0)
+    this.$refs.scroll.scrollTo(0, this.saveY, 0)
     this.$refs.scroll.refresh();
     //最好进行刷新
   },
   deactivated() {
-    this.saveY=this.$refs.scroll.getScrollY()
+    this.saveY = this.$refs.scroll.getScrollY()
   },
   methods: {
     debounce(func, delay) {
@@ -129,6 +132,8 @@ export default {
         default:
           console.log('???')
       }
+/*      this.$refs.goodList.currentIndex = index
+      this.$refs.goodListb.currentIndex = index*/
     },
     backClick() {
       // console.log("返回")

@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" @load="imageLoad">
+    <img :src="showImage" @load="imageLoad">
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <span class="pric">价格:{{ goodsItem.price }}￥</span>
@@ -20,12 +20,17 @@ export default {
       }
     }
   },
-  methods:{
-    imageLoad(){
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img
+    }
+  },
+  methods: {
+    imageLoad() {
       this.$bus.$emit('itemImageLoad')
     },
-    itemClick(){
-      this.$router.push('/detail/'+this.goodsItem.iid)
+    itemClick() {
+      this.$router.push('/detail/' + this.goodsItem.iid)
     }
   }
 }
@@ -52,21 +57,25 @@ export default {
   overflow: hidden;
   text-align: center;
 }
-.goods-info p{
+
+.goods-info p {
   overflow: hidden;
   /*显示省略符号来代表被修剪的文本。*/
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: 3px;
 }
-.goods-info .pric{
+
+.goods-info .pric {
   color: var(--color-high-text);
   margin-right: 20px;
 }
-.goods-info .collect{
+
+.goods-info .collect {
   position: relative;
 }
-.goods-info .collect::before{
+
+.goods-info .collect::before {
   content: '';
   position: absolute;
   left: -15px;
