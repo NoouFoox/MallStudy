@@ -41,7 +41,7 @@ export default {
 
 <style scoped>
 .nav-bar {
-  position: relative;
+  position: sticky;
   z-index: 9;
   background-color: #fff;
 }
@@ -61,5 +61,7 @@ export default {
 
 .back {
   margin-top: 9px;
+  position: fixed;
+  top: 0;
 }
 </style>

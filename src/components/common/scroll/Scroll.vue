@@ -69,5 +69,8 @@ export default {
 <style scoped>
 .wrapper {
   height: 100%;
+  touch-action: none;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 </style>

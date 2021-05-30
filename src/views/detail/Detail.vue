@@ -1,7 +1,7 @@
 <template>
   <div id="detail" class="detail">
-    <detail-navbar @titleClick="titleClick"/>
-    <scroll class="content" ref="descroll">
+    <detail-navbar @titleClick="titleClick" ref="detailNav"/>
+    <scroll class="content" ref="descroll" :probe-type=2 @scroll="contentScroll">
       <detail-swiper :top-image="topImage"/>
       <DetalBaseInfo :goods="goodsInfo"/>
       <detail-shop-info :shop="shopInfo"/>
@@ -10,6 +10,8 @@
       <detail-comm-info ref="CommInfo" :comment-info="commentInfo"/>
       <good-list ref="DeGoodList" :goods="recommended"/>
     </scroll>
+    <detail-bottom @addCart="addToCart"/>
+    <back-top @click.native="backClick()" v-show="isShowBT"></back-top>
   </div>
 
 </template>
@@ -30,10 +32,14 @@ import DetailParams from "@/views/detail/childcomponent/DetailParams";
 import DetailCommInfo from "@/views/detail/childcomponent/DetailCommInfo";
 import GoodList from "@/components/content/Goods/goodList";
 import {itemIxin} from "@/common/mixin";
+import DetailBottom from "@/views/detail/childcomponent/DetailBottom";
+import BackTop from "@/components/common/BackTop/BackTop";
 
 export default {
   name: "Detail",
   components: {
+    BackTop,
+    DetailBottom,
     GoodList,
     DetailCommInfo,
     DetailParams,
@@ -49,6 +55,7 @@ export default {
     return {
       iid: null,
       topImage: [],
+      isShowBT: false,
       goodsInfo: {},
       shopInfo: {},
       detailInfo: {},
@@ -56,11 +63,13 @@ export default {
       commentInfo: {},
       recommended: [],
       themeTopYs: [],
+      currentIndex: 0,
       getThemeTopY: null
     }
   },
   activated() {
     this.$refs.descroll.scrollTo(0, 0, 1)
+    this.$refs.detailNav.currentIndex = 0
     this.iid = this.$route.params.iid
     getdetaildata(this.iid).then(res => {
       const data = res.data.result
@@ -69,7 +78,7 @@ export default {
       this.shopInfo = data.shopInfo
       this.detailInfo = data.detailInfo
       this.itemParams = data.itemParams
-      if (data.rate.cRate!==0) {
+      if (data.rate.cRate !== 0) {
         this.commentInfo = data.rate.list[0]
       }
     })
@@ -85,6 +94,31 @@ export default {
     })
   },
   methods: {
+    addToCart() {
+      const product = {}
+      product.iid = this.iid
+      product.image = this.topImage[0]
+      product.title = this.goodsInfo.desc
+      product.desc = this.goodsInfo.title
+      product.price = this.goodsInfo.lPrice
+      // this.$store.commit('addCart', product)
+      this.$store.dispatch('addCart', product)
+    },
+    backClick() {
+      this.$refs.descroll.scrollTo(0, 0, 500)
+    },
+    contentScroll(po) {
+      this.isShowBT = -po.y > 1000
+      const poY = -po.y
+      let length = this.themeTopYs.length
+      for (let i = 0; i < length; i++) {
+        if (this.currentIndex !== i && (i < length - 1 && poY > this.themeTopYs[i] && poY <
+            this.themeTopYs[i + 1]) || (i === length - 1 && poY > this.themeTopYs[i])) {
+          this.currentIndex = i
+          this.$refs.detailNav.currentIndex = this.currentIndex
+        }
+      }
+    },
     detailInmageLoad() {
       this.$refs.descroll.refresh()
       this.getThemeTopY()
