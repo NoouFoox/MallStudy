@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 .nav-bar {
-  position: fixed;
+  /*position: fixed;*/
   top: 0;
   display: flex;
   /*height: 44px;*/

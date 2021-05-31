@@ -14,7 +14,7 @@
       </tr>
     </table>
     <div class="info-img" v-if="itemParams.info.images">
-      <img :src="itemParams.image[0]" alt="">
+<!--      <img v-if="this.itemParams" :src="itemParams.info.image[0]" alt="">-->
     </div>
   </div>
 </template>
@@ -22,6 +22,9 @@
 <script>
 export default {
   name: "DetailParams",
+  // mounted() {
+  //   console.log(this.itemParams)
+  // },
   props: {
     itemParams: {
       type: Object,

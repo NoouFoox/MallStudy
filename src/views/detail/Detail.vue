@@ -20,7 +20,6 @@
 
 
 import DetailNavbar from "@/views/detail/childcomponent/DetailNavbar";
-
 import {debounce} from "@/common/utils";
 import {getdetaildata, getRecommend, Goods} from "@/network/detail";
 import DetailSwiper from "@/views/detail/childcomponent/DetailSwiper";

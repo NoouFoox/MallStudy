@@ -7,7 +7,7 @@ const routes = [
     {path: '', redirect: './home'},
     {path: '/home', component: () => import('@/views/Home/Home')},
     {path: '/profile', component: () => import('@/views/profile/profile')},
-    {path: '/category', component: () => import('@/views/category/category')},
+    {path: '/category', component: () => import('@/views/category/Category')},
     {path: '/cart', component: () => import('@/views/cart/cart')},
     {
         path: '/detail/:iid'

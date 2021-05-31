@@ -2,7 +2,8 @@ export default {
     addConter(state, payload) {
         payload.count++
     },
-    addToCart(state,payload){
+    addToCart(state, payload) {
         state.cartList.push(payload)
+        payload.checked = true
     }
 }
