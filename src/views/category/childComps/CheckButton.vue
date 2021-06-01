@@ -1,6 +1,6 @@
 <template>
   <div class="check-button">
-    <div v-if="ac">
+    <div v-if="iaActive">
       <img src="~assets/img/cart/select.png" alt="">
     </div>
     <div v-else>
@@ -12,11 +12,6 @@
 <script>
 export default {
   name: "CheckButton",
-  computed: {
-    ac() {
-      return this.iaActive
-    }
-  },
   props: {
     iaActive: {
       type: Boolean,

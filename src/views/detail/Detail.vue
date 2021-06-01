@@ -100,6 +100,7 @@ export default {
       product.title = this.goodsInfo.desc
       product.desc = this.goodsInfo.title
       product.price = this.goodsInfo.lPrice
+      product.checked=true
       // this.$store.commit('addCart', product)
       this.$store.dispatch('addCart', product)
     },

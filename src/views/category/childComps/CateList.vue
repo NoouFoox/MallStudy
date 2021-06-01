@@ -26,28 +26,40 @@
 
 
 <script>
-import {mapGetters} from 'vuex'
+// import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 import CheckButton from "@/views/category/childComps/CheckButton";
 
 export default {
   name: "CateList",
   components: {CheckButton},
   computed: {
-    ...mapGetters({
+    // ...mapGetters({
+    //   list: 'cartList'
+    // }),
+    ...mapState({
       list: 'cartList'
     })
+  },
+  data(){
+    return{
+      buttonis:false
+    }
   },
   methods: {
     checkClick(item) {
       item.checked = !item.checked
+      // 对勾功能依赖此Bug勿删
+      item.count +=1
+      item.count-=1
     },
-    addClick(item){
-      item.count+=1
+    addClick(item) {
+      item.count += 1
     },
-    subClick(item){
-      if(item.count>1){
-        item.count-=1
-      }else {
+    subClick(item) {
+      if (item.count > 1) {
+        item.count -= 1
+      } else {
         console.log('不能再减少了')
       }
     },
@@ -66,7 +78,8 @@ export default {
   margin: 4px;
   color: black;
 }
-.count>span{
+
+.count > span {
   margin: 3px;
 }
 
