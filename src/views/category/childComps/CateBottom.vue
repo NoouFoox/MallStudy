@@ -2,7 +2,7 @@
   <div class="bottom-bar">
     <div class="part"><input checked="checked" type="checkbox" @click="inputclick" ref="gao"><span class="allcheck">全选</span></div>
     <div class="part">合计:{{ sumprice }}</div>
-    <div class="part yesjs">结算({{ length }})</div>
+    <div class="part yesjs" @click="endJs()">结算({{ length }})</div>
     <div></div>
   </div>
 </template>
@@ -31,6 +31,12 @@ export default {
     }
   },
   methods: {
+    endJs(){
+      if(this.length==0){
+        // console.log('请选择商品')
+        this.$toast.show('请选择至少一个商品',1500)
+      }
+    },
     inputclick() {
       if (this.$refs.gao.checked === true) {
         for (let i of this.cartList) {

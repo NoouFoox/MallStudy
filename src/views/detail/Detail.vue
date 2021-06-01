@@ -12,16 +12,12 @@
     </scroll>
     <detail-bottom @addCart="addToCart"/>
     <back-top @click.native="backClick()" v-show="isShowBT"></back-top>
+<!--    <toast :message="message" :show="show"></toast>-->
   </div>
-
 </template>
 
 <script>
-
-
 import DetailNavbar from "@/views/detail/childcomponent/DetailNavbar";
-import {debounce} from "@/common/utils";
-import {getdetaildata, getRecommend, Goods} from "@/network/detail";
 import DetailSwiper from "@/views/detail/childcomponent/DetailSwiper";
 import DetalBaseInfo from "@/views/detail/childcomponent/DetalBaseInfo";
 import Scroll from "@/components/common/scroll/Scroll";
@@ -30,13 +26,20 @@ import DetailImgInfo from "@/views/detail/childcomponent/DetailImgInfo";
 import DetailParams from "@/views/detail/childcomponent/DetailParams";
 import DetailCommInfo from "@/views/detail/childcomponent/DetailCommInfo";
 import GoodList from "@/components/content/Goods/goodList";
-import {itemIxin} from "@/common/mixin";
 import DetailBottom from "@/views/detail/childcomponent/DetailBottom";
 import BackTop from "@/components/common/BackTop/BackTop";
+// import Toast from "@/components/common/toast/Toast";
+
+import {debounce} from "@/common/utils";
+import {getdetaildata, getRecommend, Goods} from "@/network/detail";
+import {itemIxin} from "@/common/mixin";
+import {mapActions} from "vuex"
+
 
 export default {
   name: "Detail",
   components: {
+    // Toast,
     BackTop,
     DetailBottom,
     GoodList,
@@ -63,7 +66,9 @@ export default {
       recommended: [],
       themeTopYs: [],
       currentIndex: 0,
-      getThemeTopY: null
+      getThemeTopY: null,
+      // message: '',
+      // show: false
     }
   },
   activated() {
@@ -93,6 +98,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions(['addCart']),
     addToCart() {
       const product = {}
       product.iid = this.iid
@@ -100,9 +106,23 @@ export default {
       product.title = this.goodsInfo.desc
       product.desc = this.goodsInfo.title
       product.price = this.goodsInfo.lPrice
-      product.checked=true
+      product.checked = true
       // this.$store.commit('addCart', product)
-      this.$store.dispatch('addCart', product)
+      this.addCart(product).then(res => {
+        // this.show = true
+        // this.message = res
+        // setTimeout(() => {
+        //   this.show = false
+        //   this.message = ''
+        // }, 1500)
+        this.$toast.show(res,2000)
+      })
+      // this.$store.dispatch('addCart', product).then(res=>{
+      //   console.log(res)
+      // })
+      // dispatch异步
+      // commit同步
+      // 添加到购物车成功
     },
     backClick() {
       this.$refs.descroll.scrollTo(0, 0, 500)
