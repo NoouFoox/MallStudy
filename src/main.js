@@ -10,8 +10,8 @@ Vue.use(toast)
 // 解决移动端300ms
 FastClik.attach(document.body)
 // 使用VueLazyload
-Vue.use(VueLazyload,{
-    loading:require('assets/img/lod.gif')
+Vue.use(VueLazyload, {
+    loading: require('assets/img/lod.gif')
 })
 
 Vue.config.productionTip = false
